@@ -42,11 +42,11 @@ class MainActivity : AppCompatActivity() {
                         //year.toString() + month.toString() + date.toString()
                         Log.d("MAIN", "${year}, ${month + 1}, ${dayOfMonth}")
                         DateSelectBtn.setText("${year}, ${month + 1}, ${dayOfMonth}")
-
                     }
                 }, year, month, date)
                 dlg.show()
             }
+
         }
 
     }
