@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 import java.util.Calendar
 import java.util.GregorianCalendar
 
@@ -29,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 
             val DateSelectBtn = mAlerDialog.findViewById<Button>(R.id.dateSelectBtn)
 
+            var dateText = ""
+
             DateSelectBtn?.setOnClickListener {
 
                 val today = GregorianCalendar()
@@ -42,9 +46,25 @@ class MainActivity : AppCompatActivity() {
                         //year.toString() + month.toString() + date.toString()
                         Log.d("MAIN", "${year}, ${month + 1}, ${dayOfMonth}")
                         DateSelectBtn.setText("${year}, ${month + 1}, ${dayOfMonth}")
+
+                        dateText = "${year}, ${month + 1}, ${dayOfMonth}"
+
                     }
                 }, year, month, date)
                 dlg.show()
+            }
+
+            val saveBtn = mAlerDialog.findViewById<Button>(R.id.saveBtn)?.setOnClickListener {
+
+                val healMemo = mAlerDialog.findViewById<Button>(R.id.healthMemo)?.text.toString()
+
+                val database = Firebase.database
+                val myRef = database.getReference("myMemo")
+
+                val model = DataModel(dateText, healMemo)
+
+                myRef.push().setValue(model)
+
             }
 
         }
