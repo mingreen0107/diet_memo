@@ -22,6 +22,7 @@ class ListViewAdapter(val List : MutableList<DataModel>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         var convertView = convertView
+
         if (convertView == null) {
 
             convertView = LayoutInflater.from(parent?.context).inflate(R.layout.listview_item, parent, false)
